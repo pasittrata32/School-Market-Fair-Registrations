@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, Variants, HTMLMotionProps } from 'framer-motion';
 import { Language, RegistrantType, ProductItem } from '../types';
@@ -10,8 +9,8 @@ const GOOGLE_SCRIPT_URL: string = 'https://script.google.com/macros/s/AKfycbyjLr
 const translations = {
   th: {
     header: 'แบบฟอร์มลงทะเบียนตลาดนัดโรงเรียน',
-    subHeader: 'กรุณากรอกข้อมูลให้ครบถ้วนเพื่อจำหน่ายสินค้า',
-    eventTitle: 'วันตลาดนัดโรงเรียน 27 สิงหาคม 2568 เริ่มเวลา 14.50 น.เป็นต้นไป',
+    subHeader: 'กรุณากรอกข้อมูลให้ครบถ้วนเพื่อลงทะเบียนเข้าร่วมงาน',
+    eventTitle: 'วันตลาดนัดโรงเรียน 27 สิงหาคม 2568',
     langBtn: 'EN',
     personalInfo: 'ข้อมูลส่วนตัว',
     title: 'คำนำหน้า',
@@ -40,7 +39,7 @@ const translations = {
       'การลงทะเบียนไม่ได้รับประกันการได้พื้นที่ขาย',
       'ผู้ที่ลงทะเบียนสามารถเข้าพื้นที่เพื่อตั้งร้านได้ตั้งแต่เวลา 13.40 น. เป็นต้นไป',
       'ไม่อนุญาตให้ผู้ที่ไม่ลงทะเบียนเข้ามาขายสินค้าในวันงาน',
-      'ระบบจะปิดลงทะเบียนอัตโนมัติในวันที่ 26 สิงหาคม 2568'
+      'ระบบจะปิดลงทะเบียนอัตโนมัติเมื่อสิ้นสุดวันที่ 26 สิงหาคม 2568'
     ],
     agreeTh: 'ข้าพเจ้าได้อ่านและยอมรับเงื่อนไขการเข้าร่วมตลาดนัดโรงเรียน',
     agreeEn: 'I have read and agree to the market fair participation terms.',
@@ -48,7 +47,7 @@ const translations = {
     register: 'ส่งข้อมูลลงทะเบียน',
     registrationClosed: 'ปิดรับลงทะเบียนแล้ว',
     registrationClosedTitle: 'ปิดรับลงทะเบียนแล้ว',
-    registrationClosedMessage: 'ระบบได้ปิดรับลงทะเบียนอัตโนมัติแล้ว ตามกำหนดในวันที่ 26 สิงหาคม 2568',
+    registrationClosedMessage: 'ระบบได้ปิดรับลงทะเบียนอัตโนมัติแล้ว ตามกำหนด (สิ้นสุดวันที่ 26 สิงหาคม 2568)',
     thankYou: 'ขอบคุณสำหรับความสนใจในงานตลาดนัดโรงเรียน',
     submitting: 'กำลังส่งข้อมูล...',
     submitSuccess: 'การลงทะเบียนเสร็จสมบูรณ์',
@@ -64,8 +63,8 @@ const translations = {
   },
   en: {
     header: 'School Market Fair Registration Form',
-    subHeader: 'Please complete all required information to register as a vendor.',
-    eventTitle: 'School Market Day on August 27, 2025, starting at 2:50 PM onwards',
+    subHeader: 'Please fill out the form completely to register for the event.',
+    eventTitle: 'School Market Fair - August 27, 2025',
     langBtn: 'TH',
     personalInfo: 'Personal Information',
     title: 'Title',
@@ -94,7 +93,7 @@ const translations = {
       'Registration does not guarantee booth allocation',
       'Registered participants may enter to set up their booths from 1:40 PM onwards',
       'Unregistered individuals are not permitted to sell products on the event day',
-      'The registration system will automatically close on August 26, 2025'
+      'The registration system will automatically close at the end of August 26, 2025'
     ],
     agreeTh: 'ข้าพเจ้าได้อ่านและยอมรับเงื่อนไขการเข้าร่วมตลาดนัดโรงเรียน',
     agreeEn: 'I have read and agree to the market fair participation terms.',
@@ -102,7 +101,7 @@ const translations = {
     register: 'Submit Registration',
     registrationClosed: 'Registration Closed',
     registrationClosedTitle: 'Registration Closed',
-    registrationClosedMessage: 'Registration has been automatically closed on August 26, 2025',
+    registrationClosedMessage: 'Registration has been automatically closed as scheduled at the end of August 26, 2025.',
     thankYou: 'Thank you for your interest in our school market fair.',
     submitting: 'Submitting...',
     submitSuccess: 'Registration Complete',
@@ -118,7 +117,7 @@ const translations = {
   }
 };
 
-const REGISTRATION_DEADLINE = new Date('2025-08-27T09:00:00+07:00');
+const REGISTRATION_DEADLINE = new Date('2025-08-26T23:59:59+07:00');
 
 // --- Animation Variants ---
 const containerVariants: Variants = {
