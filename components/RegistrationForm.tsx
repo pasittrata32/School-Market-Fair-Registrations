@@ -40,7 +40,7 @@ const translations = {
       'การลงทะเบียนไม่ได้รับประกันการได้พื้นที่ขาย',
       'ผู้ที่ลงทะเบียนสามารถเข้าพื้นที่เพื่อตั้งร้านได้ตั้งแต่เวลา 13.40 น. เป็นต้นไป',
       'ไม่อนุญาตให้ผู้ที่ไม่ลงทะเบียนเข้ามาขายสินค้าในวันงาน',
-      'ระบบจะปิดลงทะเบียนอัตโนมัติในวันที่ 27 สิงหาคม 2568 เวลา 09.00 น.'
+      'ระบบจะปิดลงทะเบียนอัตโนมัติในวันที่ 26 สิงหาคม 2568'
     ],
     agreeTh: 'ข้าพเจ้าได้อ่านและยอมรับเงื่อนไขการเข้าร่วมตลาดนัดโรงเรียน',
     agreeEn: 'I have read and agree to the market fair participation terms.',
@@ -94,7 +94,7 @@ const translations = {
       'Registration does not guarantee booth allocation',
       'Registered participants may enter to set up their booths from 1:40 PM onwards',
       'Unregistered individuals are not permitted to sell products on the event day',
-      'The registration system will automatically close on August 27, 2025 at 9:00 AM'
+      'The registration system will automatically close on August 26, 2025'
     ],
     agreeTh: 'ข้าพเจ้าได้อ่านและยอมรับเงื่อนไขการเข้าร่วมตลาดนัดโรงเรียน',
     agreeEn: 'I have read and agree to the market fair participation terms.',
