@@ -1,0 +1,5 @@
+{
+  "name": "School Market Fair Registration",
+  "description": "A modern, bilingual registration form for a school market fair that automatically saves submission data to a Google Sheet.",
+  "requestFramePermissions": []
+}
