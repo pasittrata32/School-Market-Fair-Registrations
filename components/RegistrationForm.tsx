@@ -10,8 +10,8 @@ const GOOGLE_SCRIPT_URL: string = 'https://script.google.com/macros/s/AKfycbyjLr
 const translations = {
   th: {
     header: 'แบบฟอร์มลงทะเบียนตลาดนัดโรงเรียน',
-    subHeader: 'กรุณากรอกข้อมูลให้ครบถ้วนเพื่อลงทะเบียนเข้าร่วมงาน',
-    eventTitle: 'วันตลาดนัดโรงเรียน 27 สิงหาคม 2568',
+    subHeader: 'กรุณากรอกข้อมูลให้ครบถ้วนเพื่อจำหน่ายสินค้า',
+    eventTitle: 'วันตลาดนัดโรงเรียน 27 สิงหาคม 2568 เริ่มเวลา 14.50 น.เป็นต้นไป',
     langBtn: 'EN',
     personalInfo: 'ข้อมูลส่วนตัว',
     title: 'คำนำหน้า',
@@ -64,8 +64,8 @@ const translations = {
   },
   en: {
     header: 'School Market Fair Registration Form',
-    subHeader: 'Please fill out the form completely to register for the event.',
-    eventTitle: 'School Market Fair - August 27, 2025',
+    subHeader: 'Please complete all required information to register as a vendor.',
+    eventTitle: 'School Market Day on August 27, 2025, starting at 2:50 PM onwards',
     langBtn: 'TH',
     personalInfo: 'Personal Information',
     title: 'Title',
