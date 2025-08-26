@@ -1,68 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registration Closed - Satit Udomseuksa School</title>
+    <title>School Market Fair Registration</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-      body {
-        font-family: 'Sarabun', sans-serif;
+      @keyframes fade-in {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
       }
-      .swal2-title, .swal2-html-container, .swal2-confirm {
-        font-family: 'Sarabun', sans-serif !important;
+      .animate-fade-in {
+        animation: fade-in 0.5s ease-out forwards;
       }
     </style>
-<script type="importmap">
+  <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.12"
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "framer-motion": "https://esm.sh/framer-motion@^11.3.8"
   }
 }
 </script>
 </head>
-<body class="bg-slate-900">
-
-    <main class="min-h-screen flex items-center justify-center p-4 antialiased">
-        <div class="bg-white text-slate-800 rounded-2xl shadow-2xl p-8 sm:p-12 max-w-2xl w-full text-center transition-transform duration-300">
-            <div class="mx-auto mb-6 bg-slate-100 rounded-full h-20 w-20 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </div>
-            
-            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
-                ขออภัย ขณะนี้หมดเวลาการลงทะเบียนแล้ว
-            </h1>
-            <p class="text-xl sm:text-2xl text-slate-600">
-                Sorry, the registration period has ended.
-            </p>
-
-            <div class="mt-8 border-t border-slate-200 pt-6">
-                <p class="text-sm text-slate-500">
-                    โรงเรียนสาธิตอุดมศึกษา | Satit Udomseuksa School
-                </p>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            Swal.fire({
-                title: 'ขออภัย การลงทะเบียนสิ้นสุดแล้ว <br/> Sorry, registration has been closed.',
-                icon: 'info',
-                confirmButtonText: 'ตกลง / OK',
-                customClass: {
-                    title: 'text-xl sm:text-2xl leading-tight',
-                }
-            });
-        });
-    </script>
-
-</body>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>

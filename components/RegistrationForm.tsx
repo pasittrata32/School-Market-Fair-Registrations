@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, Variants, HTMLMotionProps } from 'framer-motion';
 import { Language, RegistrantType, ProductItem } from '../types';
 
@@ -39,15 +39,11 @@ const translations = {
       'การลงทะเบียนไม่ได้รับประกันการได้พื้นที่ขาย',
       'ผู้ที่ลงทะเบียนสามารถเข้าพื้นที่เพื่อตั้งร้านได้ตั้งแต่เวลา 13.40 น. เป็นต้นไป',
       'ไม่อนุญาตให้ผู้ที่ไม่ลงทะเบียนเข้ามาขายสินค้าในวันงาน',
-      'ระบบจะปิดลงทะเบียนอัตโนมัติเมื่อสิ้นสุดวันที่ 26 สิงหาคม 2568'
     ],
     agreeTh: 'ข้าพเจ้าได้อ่านและยอมรับเงื่อนไขการเข้าร่วมตลาดนัดโรงเรียน',
     agreeEn: 'I have read and agree to the market fair participation terms.',
     timestampLabel: 'วันที่-เวลาลงทะเบียน:',
     register: 'ส่งข้อมูลลงทะเบียน',
-    registrationClosed: 'ปิดรับลงทะเบียนแล้ว',
-    registrationClosedTitle: 'ปิดรับลงทะเบียนแล้ว',
-    registrationClosedMessage: 'ระบบได้ปิดรับลงทะเบียนอัตโนมัติแล้ว ตามกำหนด (สิ้นสุดวันที่ 26 สิงหาคม 2568)',
     thankYou: 'ขอบคุณสำหรับความสนใจในงานตลาดนัดโรงเรียน',
     submitting: 'กำลังส่งข้อมูล...',
     submitSuccess: 'การลงทะเบียนเสร็จสมบูรณ์',
@@ -93,15 +89,11 @@ const translations = {
       'Registration does not guarantee booth allocation',
       'Registered participants may enter to set up their booths from 1:40 PM onwards',
       'Unregistered individuals are not permitted to sell products on the event day',
-      'The registration system will automatically close at the end of August 26, 2025'
     ],
     agreeTh: 'ข้าพเจ้าได้อ่านและยอมรับเงื่อนไขการเข้าร่วมตลาดนัดโรงเรียน',
     agreeEn: 'I have read and agree to the market fair participation terms.',
     timestampLabel: 'Registration Date-Time:',
     register: 'Submit Registration',
-    registrationClosed: 'Registration Closed',
-    registrationClosedTitle: 'Registration Closed',
-    registrationClosedMessage: 'Registration has been automatically closed as scheduled at the end of August 26, 2025.',
     thankYou: 'Thank you for your interest in our school market fair.',
     submitting: 'Submitting...',
     submitSuccess: 'Registration Complete',
@@ -116,8 +108,6 @@ const translations = {
     configErrorMessage: 'Please set your Google Apps Script URL in components/RegistrationForm.tsx',
   }
 };
-
-const REGISTRATION_DEADLINE = new Date('2025-08-26T23:59:59+07:00');
 
 // --- Animation Variants ---
 const containerVariants: Variants = {
@@ -193,7 +183,6 @@ interface RegistrationFormProps {
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ initialLanguage }) => {
   const [lang, setLang] = useState<Language>(initialLanguage);
-  const [isClosed, setIsClosed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   
   const t = useMemo(() => translations[lang], [lang]);
@@ -206,20 +195,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ initialLanguage }) 
   const [formData, setFormData] = useState(initialFormData);
   const [products, setProducts] = useState<ProductItem[]>([{ id: Date.now(), name: '' }]);
   
-  const checkDeadline = useCallback(() => {
-    if (new Date() >= REGISTRATION_DEADLINE) {
-      setIsClosed(true);
-      return true;
-    }
-    return false;
-  }, []);
-  
-  useEffect(() => {
-    checkDeadline();
-    const interval = setInterval(checkDeadline, 60000);
-    return () => clearInterval(interval);
-  }, [checkDeadline]);
-
   const resetForm = () => {
     setFormData(initialFormData);
     setProducts([{ id: Date.now(), name: '' }]);
@@ -273,7 +248,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ initialLanguage }) 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(submitting || isClosed) return;
+    if(submitting) return;
     if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
         Swal.fire({ icon: 'error', title: t.configError, text: t.configErrorMessage });
         return;
@@ -310,19 +285,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ initialLanguage }) 
     }
   };
   
-  if (isClosed) {
-    return (
-        <div className="fixed inset-0 bg-gray-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
-            <div className="bg-white border border-slate-200 rounded-2xl p-8 max-w-md mx-auto text-center form-soft-shadow">
-                <div className="text-6xl mb-4">⏰</div>
-                <h2 className="text-2xl font-bold text-red-600 mb-4">{t.registrationClosedTitle}</h2>
-                <p className="text-slate-600 mb-4">{t.registrationClosedMessage}</p>
-                <p className="text-sm text-slate-500">{t.thankYou}</p>
-            </div>
-        </div>
-    );
-  }
-
   return (
     <div className="w-full">
       <div className="flex justify-end mb-4">
