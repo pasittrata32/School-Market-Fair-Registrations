@@ -1,10 +1,16 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, Variants, HTMLMotionProps } from 'framer-motion';
 import { Language, RegistrantType, ProductItem } from '../types';
+import RegistrationClosedModal from './RegistrationClosedModal';
 
 declare const Swal: any;
 
 const GOOGLE_SCRIPT_URL: string = 'https://script.google.com/macros/s/AKfycbyjLrlFzHL-9sHPSMI7aeX12qt_jFEXW69QOhN1mnfUT_IbBoyWQZQZVkDOIG2B77-2mQ/exec';
+
+// --- REGISTRATION DEADLINE ---
+// To re-open registration, set this to a date in the future.
+// Example: new Date('2025-08-26T23:59:59')
+const REGISTRATION_DEADLINE = new Date('2024-01-01T00:00:00Z');
 
 const translations = {
   th: {
@@ -182,9 +188,16 @@ interface RegistrationFormProps {
 }
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ initialLanguage }) => {
+  const [isRegistrationClosed, setIsRegistrationClosed] = useState(false);
   const [lang, setLang] = useState<Language>(initialLanguage);
   const [submitting, setSubmitting] = useState(false);
   
+  useEffect(() => {
+    if (new Date() > REGISTRATION_DEADLINE) {
+      setIsRegistrationClosed(true);
+    }
+  }, []);
+
   const t = useMemo(() => translations[lang], [lang]);
 
   const initialFormData = {
@@ -284,6 +297,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ initialLanguage }) 
         setSubmitting(false);
     }
   };
+  
+  if (isRegistrationClosed) {
+    return <RegistrationClosedModal />;
+  }
   
   return (
     <div className="w-full">
